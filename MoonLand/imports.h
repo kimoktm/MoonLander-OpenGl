@@ -12,10 +12,12 @@
 #else
 #ifdef _WIN32
 #include <windows.h>
-#endif
+#include <glut.h>
+#else
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
+#endif
 #endif
 
 static const int WINWIDTH = 640, WINHEIGHT = 480, RENDERRATE = 20;
