@@ -11,21 +11,23 @@ public:
 	void endGame();
 	void frameCollision();
 	void useFuel(float usage);
+    void decreaseTime(float timePassed);
 	void rotate(float rotationDeg);
 	void setAcceleration(float speedX, float speedY);
     void checkCollision(Terrain terrain);
-    void checkFuel();
+    void checkFuelandTime();
 	float getY();
 	bool isGameOver();
 	Point *getPositions();
 private:
 	void draw();
 	void drawFuel();
+    void drawTimer();
     void loseGame();
     void winGame();
 	Point getRotatedPoint(float x, float y);
 	float x, y, startX, startY, rotateDeg, speedX, speedY, shipWidth,
-			shipHeight, fuel, fuelUsage, gravitySpeed;
+			shipHeight, fuel, time, fuelUsage, gravitySpeed;
 	bool GameOver;
 };
 

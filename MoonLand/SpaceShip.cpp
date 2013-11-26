@@ -9,6 +9,7 @@ SpaceShip::SpaceShip(float startX, float startY) {
 	this->startX = startX;
 	this->startY = startY;
 	fuel = 101.0f;
+    time = 101.0f;
 	fuelUsage = 0.6f;
 	shipWidth = 76.0f;
 	shipHeight = 97.0f;
@@ -95,6 +96,16 @@ void SpaceShip::drawFuel() {
                                    "Fuel");
 }
 
+void SpaceShip::drawTimer() {
+	glColor3f(0.847, 0.902, 0.925);
+	basicShapes.circleSpan(WINWIDTH - 30, WINHEIGHT - 30, time, 20);
+	glColor3f(0.807, 0.862, 0.885);
+	basicShapes.hallowCircle(WINWIDTH - 30, WINHEIGHT - 30, 20);
+	glColor3f(1, 1, 1);
+	basicShapes.renderBitmapString(WINWIDTH - 42, WINHEIGHT - 64, GLUT_BITMAP_HELVETICA_12,
+                                   "Time");
+}
+
 void SpaceShip::render() {
 	glPushMatrix();
     
@@ -107,6 +118,7 @@ void SpaceShip::render() {
 	glPopMatrix();
     
 	drawFuel();
+    drawTimer();
 }
 
 void SpaceShip::frameCollision() {
@@ -144,8 +156,8 @@ void SpaceShip::checkCollision(Terrain terrain) {
 	}
 }
 
-void SpaceShip::checkFuel(){
-    if(fuel <= 0)
+void SpaceShip::checkFuelandTime(){
+    if(fuel <= 0 || time <= 0)
         loseGame();
 }
 
@@ -161,6 +173,12 @@ void SpaceShip::useFuel(float usage) {
 	fuel -= usage;
 	if (fuel < 0)
         fuel = 0;
+}
+
+void SpaceShip::decreaseTime(float timePassed){
+	time -= timePassed;
+	if (time < 0)
+        time = 0;
 }
 
 void SpaceShip::move() {
@@ -181,6 +199,7 @@ void SpaceShip::reset() {
 	speedX = speedY = x = y = rotateDeg = 0;
 	GameOver = false;
 	fuel = 101.0f;
+    time = 101.0f;
 }
 
 void SpaceShip::endGame() {

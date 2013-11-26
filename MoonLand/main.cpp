@@ -34,7 +34,7 @@ void myDisplay(void) {
 	terrain.render();
 	spaceShip.render();
     spaceShip.checkCollision(terrain);
-    spaceShip.checkFuel();
+    spaceShip.checkFuelandTime();
 	glutSwapBuffers();
 }
 
@@ -42,11 +42,11 @@ void timer(int iUnused) {
 	if (!spaceShip.isGameOver()) {
 		spaceShip.move();
 		spaceShip.frameCollision();
-		spaceShip.useFuel(0.01f);
+		spaceShip.useFuel(0.005f);
+        spaceShip.decreaseTime(0.1f);
 		glutPostRedisplay();
 	}
 	glutTimerFunc(RENDERRATE, timer, 0);
-
 }
 
 void keyboard(unsigned char key, int mousePositionX, int mousePositionY) {
